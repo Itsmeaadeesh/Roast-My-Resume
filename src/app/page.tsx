@@ -64,9 +64,8 @@ export default function Home() {
         throw new Error(roastData.error || "Failed to generate résumé roast.");
       }
 
-      // We will render results in Step 3!
-      // For now, save to state and prepare transition
-      console.log("Roast data received:", roastData);
+      setRoastResult(roastData);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err: unknown) {
       console.error(err);
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";
