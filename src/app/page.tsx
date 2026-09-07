@@ -43,6 +43,32 @@ export default function Home() {
     }
   };
 
+  const fetchMarketData = async (role: string) => {
+    setIsLoadingMarket(true);
+    try {
+      const headers: Record<string, string> = {};
+      if (settings.usajobsKey) {
+        headers["x-usajobs-key"] = settings.usajobsKey;
+      }
+      if (settings.usajobsEmail) {
+        headers["x-usajobs-email"] = settings.usajobsEmail;
+      }
+
+      const res = await fetch(`/api/market?role=${encodeURIComponent(role)}`, {
+        headers,
+      });
+
+      if (res.ok) {
+        const data: MarketData = await res.json();
+        setMarketData(data);
+      }
+    } catch (err) {
+      console.warn("Error fetching market data:", err);
+    } finally {
+      setIsLoadingMarket(false);
+    }
+  };
+
   const handleResumeSubmit = async (resumeText: string, targetRole: string) => {
     setIsLoading(true);
     setError(null);
@@ -66,6 +92,9 @@ export default function Home() {
 
       setRoastResult(roastData);
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Trigger USAJOBS Market Reality Check
+      fetchMarketData(roastData.candidateRole);
     } catch (err: unknown) {
       console.error(err);
       const msg = err instanceof Error ? err.message : "An unexpected error occurred.";

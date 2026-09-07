@@ -3,6 +3,7 @@ import { RoastResult, MarketData } from "@/types";
 import { DossierHeader } from "@/components/DossierHeader";
 import { VerdictPullQuote } from "@/components/VerdictPullQuote";
 import { SectionBreakdown } from "@/components/SectionBreakdown";
+import { RealityCheckPanel } from "@/components/RealityCheckPanel";
 import { RedemptionArc } from "@/components/RedemptionArc";
 
 interface DossierViewProps {
@@ -34,8 +35,11 @@ export const DossierView: React.FC<DossierViewProps> = ({
       {/* Section-by-Section Inquest */}
       <SectionBreakdown breakdown={roast.breakdown} />
 
-      {/* Job Market Reality Check will plug in here in Step 5 */}
-      <div id="reality-check-placeholder" />
+      {/* Job Market Reality Check Panel */}
+      <RealityCheckPanel
+        marketData={marketData}
+        isLoading={isLoadingMarket}
+      />
 
       {/* The Redemption Arc Checklist */}
       <RedemptionArc items={roast.redemptionArc} />
