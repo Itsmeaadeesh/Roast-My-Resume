@@ -5,12 +5,16 @@ import { Masthead } from "@/components/Masthead";
 import { ResumeInput } from "@/components/ResumeInput";
 import { TelegramLoader } from "@/components/TelegramLoader";
 import { SettingsModal } from "@/components/SettingsModal";
-import { AppSettings } from "@/types";
+import { DossierView } from "@/components/DossierView";
+import { AppSettings, RoastResult, MarketData } from "@/types";
 import { Shield, AlertTriangle } from "lucide-react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [roastResult, setRoastResult] = useState<RoastResult | null>(null);
+  const [marketData, setMarketData] = useState<MarketData | null>(null);
+  const [isLoadingMarket, setIsLoadingMarket] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     geminiKey: "",
@@ -112,6 +116,17 @@ export default function Home() {
 
         {isLoading ? (
           <TelegramLoader />
+        ) : roastResult ? (
+          <DossierView
+            roast={roastResult}
+            marketData={marketData}
+            isLoadingMarket={isLoadingMarket}
+            onReset={() => {
+              setRoastResult(null);
+              setMarketData(null);
+              setError(null);
+            }}
+          />
         ) : (
           <ResumeInput
             onSubmit={handleResumeSubmit}
