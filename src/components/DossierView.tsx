@@ -45,10 +45,10 @@ export const DossierView: React.FC<DossierViewProps> = ({
       <RedemptionArc items={roast.redemptionArc} />
 
       {/* Action Footer: Reset & Share Card */}
-      <div className="mt-12 pt-6 border-t-2 border-[#1A1A1A] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+      <div className="mt-12 pt-6 border-t-2 border-[#1A1A1A] dark:border-[#EDEAE4] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs transition-colors">
         <button
           onClick={onReset}
-          className="w-full sm:w-auto px-4 py-3 border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#F7F5F0] transition-colors uppercase tracking-wider cursor-pointer"
+          className="w-full sm:w-auto px-4 py-3 border border-[#1A1A1A] dark:border-[#EDEAE4] hover:bg-[#1A1A1A] dark:hover:bg-[#EDEAE4] hover:text-[#F7F5F0] dark:hover:text-[#141413] text-[#1A1A1A] dark:text-[#F0EDE5] transition-colors uppercase tracking-wider cursor-pointer"
         >
           &larr; Audit Another Résumé
         </button>
@@ -56,7 +56,7 @@ export const DossierView: React.FC<DossierViewProps> = ({
         {onOpenCardExport && (
           <button
             onClick={onOpenCardExport}
-            className="w-full sm:w-auto px-6 py-3 bg-[#B91C1C] hover:bg-[#991B1B] text-[#F7F5F0] uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 bg-[#B91C1C] dark:bg-[#EF4444] hover:bg-[#991B1B] dark:hover:bg-[#DC2626] text-[#F7F5F0] dark:text-[#FFFFFF] uppercase tracking-widest font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>GENERATE VIRAL ROAST CARD</span>
           </button>

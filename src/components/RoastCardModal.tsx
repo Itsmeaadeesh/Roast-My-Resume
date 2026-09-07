@@ -309,18 +309,18 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-[2px] overflow-y-auto">
-      <div className="w-full max-w-2xl bg-[#F7F5F0] border-2 border-[#1A1A1A] p-6 shadow-none my-8">
+      <div className="w-full max-w-2xl bg-[#F7F5F0] dark:bg-[#141413] border-2 border-[#1A1A1A] dark:border-[#EDEAE4] p-6 shadow-none my-8 transition-colors">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#1A1A1A] pb-3 mb-4">
+        <div className="flex items-center justify-between border-b border-[#1A1A1A] dark:border-[#EDEAE4] pb-3 mb-4">
           <div className="flex items-center gap-2">
-            <Share2 size={16} className="text-[#B91C1C]" />
-            <h3 className="font-mono text-xs uppercase tracking-widest font-bold text-[#1A1A1A]">
+            <Share2 size={16} className="text-[#B91C1C] dark:text-[#EF4444]" />
+            <h3 className="font-mono text-xs uppercase tracking-widest font-bold text-[#1A1A1A] dark:text-[#F0EDE5]">
               EDITORIAL ROAST CARD // SOCIAL EXPORT
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="text-[#5C5855] hover:text-[#1A1A1A] p-1 cursor-pointer"
+            className="text-[#5C5855] dark:text-[#9E9A93] hover:text-[#1A1A1A] dark:hover:text-[#F0EDE5] p-1 cursor-pointer"
           >
             <X size={16} />
           </button>
@@ -328,14 +328,14 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
 
         {/* Aspect Ratio Selector */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 text-xs font-mono">
-          <span className="text-[#8C8477] uppercase text-[11px]">FORMAT:</span>
+          <span className="text-[#8C8477] dark:text-[#7A756D] uppercase text-[11px]">FORMAT:</span>
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setAspectRatio("story")}
               className={`px-2.5 py-1 text-[11px] border transition-colors cursor-pointer ${
                 aspectRatio === "story"
-                  ? "bg-[#1A1A1A] text-[#F7F5F0] border-[#1A1A1A]"
-                  : "bg-white text-[#1A1A1A] border-[#D8D2C7] hover:border-[#1A1A1A]"
+                  ? "bg-[#1A1A1A] dark:bg-[#EDEAE4] text-[#F7F5F0] dark:text-[#141413] border-[#1A1A1A] dark:border-[#EDEAE4]"
+                  : "bg-white dark:bg-[#1C1C1A] text-[#1A1A1A] dark:text-[#F0EDE5] border-[#D8D2C7] dark:border-[#2E2D2A] hover:border-[#1A1A1A] dark:hover:border-[#EDEAE4]"
               }`}
             >
               PORTRAIT (4:5 / STORIES & LINKEDIN)
@@ -344,8 +344,8 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
               onClick={() => setAspectRatio("post")}
               className={`px-2.5 py-1 text-[11px] border transition-colors cursor-pointer ${
                 aspectRatio === "post"
-                  ? "bg-[#1A1A1A] text-[#F7F5F0] border-[#1A1A1A]"
-                  : "bg-white text-[#1A1A1A] border-[#D8D2C7] hover:border-[#1A1A1A]"
+                  ? "bg-[#1A1A1A] dark:bg-[#EDEAE4] text-[#F7F5F0] dark:text-[#141413] border-[#1A1A1A] dark:border-[#EDEAE4]"
+                  : "bg-white dark:bg-[#1C1C1A] text-[#1A1A1A] dark:text-[#F0EDE5] border-[#D8D2C7] dark:border-[#2E2D2A] hover:border-[#1A1A1A] dark:hover:border-[#EDEAE4]"
               }`}
             >
               LANDSCAPE (16:9 / FEED BANNER)
@@ -354,29 +354,29 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
         </div>
 
         {/* Canvas Display Viewport */}
-        <div className="border border-[#1A1A1A] bg-[#EFEAE1] p-2 flex justify-center max-h-[55vh] overflow-auto">
+        <div className="border border-[#1A1A1A] dark:border-[#EDEAE4] bg-[#EFEAE1] dark:bg-[#1C1C1A] p-2 flex justify-center max-h-[55vh] overflow-auto">
           <canvas
             ref={canvasRef}
-            className="max-w-full h-auto shadow-sm border border-[#D8D2C7]"
+            className="max-w-full h-auto shadow-sm border border-[#D8D2C7] dark:border-[#2E2D2A]"
             style={{ maxHeight: "50vh" }}
           />
         </div>
 
         {/* Action Controls */}
-        <div className="mt-5 pt-4 border-t border-[#D8D2C7] flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs">
-          <span className="text-[11px] text-[#8C8477] uppercase flex items-center gap-1">
-            <Sparkles size={12} className="text-[#B91C1C]" />
+        <div className="mt-5 pt-4 border-t border-[#D8D2C7] dark:border-[#2E2D2A] flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs">
+          <span className="text-[11px] text-[#8C8477] dark:text-[#7A756D] uppercase flex items-center gap-1">
+            <Sparkles size={12} className="text-[#B91C1C] dark:text-[#EF4444]" />
             READY TO SHARE TO LINKEDIN, X, OR INSTAGRAM
           </span>
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
               onClick={handleCopy}
-              className="flex-1 sm:flex-none px-4 py-2.5 border border-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-[#F7F5F0] transition-colors flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider text-[11px]"
+              className="flex-1 sm:flex-none px-4 py-2.5 border border-[#1A1A1A] dark:border-[#EDEAE4] hover:bg-[#1A1A1A] dark:hover:bg-[#EDEAE4] hover:text-[#F7F5F0] dark:hover:text-[#141413] text-[#1A1A1A] dark:text-[#F0EDE5] transition-colors flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider text-[11px]"
             >
               {copied ? (
                 <>
-                  <Check size={14} className="text-[#B91C1C]" />
+                  <Check size={14} className="text-[#B91C1C] dark:text-[#EF4444]" />
                   <span>COPIED IMAGE!</span>
                 </>
               ) : (
@@ -389,7 +389,7 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
 
             <button
               onClick={handleDownload}
-              className="flex-1 sm:flex-none px-5 py-2.5 bg-[#B91C1C] hover:bg-[#991B1B] text-[#F7F5F0] transition-colors flex items-center justify-center gap-1.5 cursor-pointer font-bold uppercase tracking-wider text-[11px]"
+              className="flex-1 sm:flex-none px-5 py-2.5 bg-[#B91C1C] dark:bg-[#EF4444] hover:bg-[#991B1B] dark:hover:bg-[#DC2626] text-[#F7F5F0] dark:text-[#FFFFFF] transition-colors flex items-center justify-center gap-1.5 cursor-pointer font-bold uppercase tracking-wider text-[11px]"
             >
               <Download size={14} />
               <span>DOWNLOAD PNG</span>

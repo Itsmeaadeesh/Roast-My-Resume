@@ -32,14 +32,14 @@ export const VerdictPullQuote: React.FC<VerdictPullQuoteProps> = ({
   }, [verdict]);
 
   return (
-    <section className="my-8 py-6 px-6 sm:px-8 bg-[#FAF8F5] border-l-4 border-[#B91C1C] border-y border-r border-[#D8D2C7] relative">
+    <section className="my-8 py-6 px-6 sm:px-8 bg-[#FAF8F5] dark:bg-[#191816] border-l-4 border-[#B91C1C] dark:border-[#EF4444] border-y border-r border-[#D8D2C7] dark:border-[#2E2D2A] relative transition-colors">
       {/* Top tag */}
-      <div className="flex items-center justify-between gap-4 border-b border-[#D8D2C7] pb-3 mb-4">
-        <span className="text-[11px] font-mono uppercase tracking-widest text-[#B91C1C] font-bold flex items-center gap-1.5">
+      <div className="flex items-center justify-between gap-4 border-b border-[#D8D2C7] dark:border-[#2E2D2A] pb-3 mb-4">
+        <span className="text-[11px] font-mono uppercase tracking-widest text-[#B91C1C] dark:text-[#EF4444] font-bold flex items-center gap-1.5">
           <Quote size={13} />
           THE VERDICT // EDITORIAL OPINION
         </span>
-        <span className="text-[10px] font-mono text-[#8C8477] uppercase tracking-wider">
+        <span className="text-[10px] font-mono text-[#8C8477] dark:text-[#7A756D] uppercase tracking-wider">
           CLASSIFICATION: {classifiedNotice}
         </span>
       </div>
@@ -55,19 +55,19 @@ export const VerdictPullQuote: React.FC<VerdictPullQuoteProps> = ({
         className="cursor-pointer select-text"
         title={!isDoneTyping ? "Click to display immediately" : undefined}
       >
-        <p className="text-xl sm:text-2xl md:text-3xl font-serif italic text-[#1A1A1A] leading-snug tracking-tight">
+        <p className="text-xl sm:text-2xl md:text-3xl font-serif italic text-[#1A1A1A] dark:text-[#F0EDE5] leading-snug tracking-tight">
           &ldquo;{displayedText}&rdquo;
           {!isDoneTyping && (
-            <span className="inline-block w-2.5 h-6 ml-1 bg-[#B91C1C] align-middle animate-blink" />
+            <span className="inline-block w-2.5 h-6 ml-1 bg-[#B91C1C] dark:bg-[#EF4444] align-middle animate-blink" />
           )}
         </p>
       </blockquote>
 
       {/* Pull Quote Attributed Footnote */}
-      <div className="mt-4 pt-3 border-t border-[#E8E2D7] flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-[#5C5855] gap-1">
+      <div className="mt-4 pt-3 border-t border-[#E8E2D7] dark:border-[#262522] flex flex-col sm:flex-row sm:items-center justify-between text-xs font-mono text-[#5C5855] dark:text-[#9E9A93] gap-1">
         <span>— Senior Talent Partner & Technical Hiring Bar-Raiser</span>
         {!isDoneTyping && (
-          <span className="text-[10px] text-[#8C8477] italic">
+          <span className="text-[10px] text-[#8C8477] dark:text-[#7A756D] italic">
             [Typewriter teletype rendering... click text to reveal in full]
           </span>
         )}

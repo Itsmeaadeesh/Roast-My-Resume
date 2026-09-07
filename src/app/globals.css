@@ -1,8 +1,37 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #F7F5F0;
   --foreground: #1A1A1A;
+  --color-paper: #F7F5F0;
+  --color-paper-dim: #EFEAE1;
+  --color-paper-card: #FAF8F5;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: #5C5855;
+  --color-ink-faint: #8E8A85;
+  --color-rule: #D8D2C7;
+  --color-rule-dark: #8C8477;
+  --color-roast: #B91C1C;
+  --color-roast-dark: #991B1B;
+  --color-amber-ink: #C2751A;
+}
+
+.dark {
+  --background: #141413;
+  --foreground: #F0EDE5;
+  --color-paper: #141413;
+  --color-paper-dim: #1C1C1A;
+  --color-paper-card: #191816;
+  --color-ink: #F0EDE5;
+  --color-ink-muted: #9E9A93;
+  --color-ink-faint: #6E6B65;
+  --color-rule: #2E2D2A;
+  --color-rule-dark: #4A4843;
+  --color-roast: #EF4444;
+  --color-roast-dark: #DC2626;
+  --color-amber-ink: #E59530;
 }
 
 @theme {
@@ -28,6 +57,12 @@ body {
   font-family: var(--font-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dark body {
+  background-color: #141413;
+  color: #F0EDE5;
 }
 
 /* Sharp focus outlines for accessibility without rounded rings */
@@ -36,6 +71,12 @@ textarea:focus-visible,
 button:focus-visible {
   outline: 1.5px solid #1A1A1A;
   outline-offset: 1px;
+}
+
+.dark input:focus-visible,
+.dark textarea:focus-visible,
+.dark button:focus-visible {
+  outline: 1.5px solid #F0EDE5;
 }
 
 /* Tactile editorial micro-interactions */
@@ -58,6 +99,10 @@ button:focus-visible {
   transition: transform 0.2s ease-out;
 }
 
+.dark .editorial-hover::after {
+  background-color: #EF4444;
+}
+
 .editorial-hover:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
@@ -68,8 +113,16 @@ button:focus-visible {
   border-top: 3px double #1A1A1A;
 }
 
+.dark .double-rule-top {
+  border-top: 3px double #EDEAE4;
+}
+
 .double-rule-bottom {
   border-bottom: 3px double #1A1A1A;
+}
+
+.dark .double-rule-bottom {
+  border-bottom: 3px double #EDEAE4;
 }
 
 /* Custom scrollbar for editorial aesthetic */
@@ -80,10 +133,19 @@ button:focus-visible {
 ::-webkit-scrollbar-track {
   background: #EFEAE1;
 }
+.dark ::-webkit-scrollbar-track {
+  background: #1C1C1A;
+}
 ::-webkit-scrollbar-thumb {
   background: #A39D93;
   border-radius: 0px;
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: #4A4843;
+}
 ::-webkit-scrollbar-thumb:hover {
   background: #1A1A1A;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #F0EDE5;
 }

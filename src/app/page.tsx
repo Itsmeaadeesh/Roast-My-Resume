@@ -73,7 +73,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F5F0] text-[#1A1A1A] font-serif">
+    <div className="min-h-screen flex flex-col bg-[#F7F5F0] dark:bg-[#141413] text-[#1A1A1A] dark:text-[#F0EDE5] font-serif transition-colors">
       {/* Masthead Header */}
       <Masthead />
 
@@ -81,10 +81,10 @@ export default function Home() {
       <main className="flex-1">
         {error && (
           <div className="max-w-4xl mx-auto px-4 mt-6">
-            <div className="p-4 border-l-4 border-[#B91C1C] bg-[#FAF0F0] text-[#1A1A1A] font-mono text-xs flex items-start gap-3">
-              <AlertTriangle size={18} className="text-[#B91C1C] shrink-0 mt-0.5" />
+            <div className="p-4 border-l-4 border-[#B91C1C] dark:border-[#EF4444] bg-[#FAF0F0] dark:bg-[#2A1515] text-[#1A1A1A] dark:text-[#F0EDE5] font-mono text-xs flex items-start gap-3">
+              <AlertTriangle size={18} className="text-[#B91C1C] dark:text-[#EF4444] shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-[#B91C1C] uppercase tracking-wider block mb-1">
+                <span className="font-bold text-[#B91C1C] dark:text-[#EF4444] uppercase tracking-wider block mb-1">
                   EDITORIAL DESK NOTICE // REVISE & RETRY
                 </span>
                 <span>{error}</span>
@@ -113,10 +113,10 @@ export default function Home() {
       </main>
 
       {/* Editorial Footer */}
-      <footer className="w-full border-t border-[#D8D2C7] bg-[#FAF8F5] py-8 mt-16 text-xs font-mono text-[#5C5855]">
+      <footer className="w-full border-t border-[#D8D2C7] dark:border-[#2E2D2A] bg-[#FAF8F5] dark:bg-[#191816] py-8 mt-16 text-xs font-mono text-[#5C5855] dark:text-[#9E9A93] transition-colors">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-[#1A1A1A] uppercase tracking-wider">
+            <span className="font-bold text-[#1A1A1A] dark:text-[#F0EDE5] uppercase tracking-wider">
               ROAST MY RÉSUMÉ
             </span>
             <span>•</span>
@@ -125,11 +125,11 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
             <span className="flex items-center gap-1">
-              <Shield size={12} className="text-[#B91C1C]" />
+              <Shield size={12} className="text-[#B91C1C] dark:text-[#EF4444]" />
               ZERO DATA STORAGE
             </span>
             <span>•</span>
-            <span>GEMINI 2.5 CORE</span>
+            <span>GEMINI 3.6 FLASH</span>
             <span>•</span>
             <span>USAJOBS REST API</span>
           </div>
@@ -139,7 +139,7 @@ export default function Home() {
               href="https://github.com/Itsmeaadeesh/Roast-My-Resume"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 text-[#1A1A1A] hover:text-[#B91C1C] transition-colors editorial-hover"
+              className="flex items-center gap-1.5 text-[#1A1A1A] dark:text-[#F0EDE5] hover:text-[#B91C1C] dark:hover:text-[#EF4444] transition-colors editorial-hover"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path
