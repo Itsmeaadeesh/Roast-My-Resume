@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { extractText } from "unpdf";
 
 export async function POST(req: NextRequest) {
   try {
@@ -7,47 +8,71 @@ export async function POST(req: NextRequest) {
 
     if (!file) {
       return NextResponse.json(
-        { error: "No file was uploaded." },
+        { error: "No résumé file was received." },
         { status: 400 }
       );
     }
 
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    const uint8Array = new Uint8Array(arrayBuffer);
 
-    // Dynamic import to avoid bundling issues
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const pdfParseModule = (await import("pdf-parse")) as any;
-    const pdfParse = pdfParseModule.default || pdfParseModule;
-    
-    // pdf-parse can be called as a function or class
-    let extractedText = "";
-    if (typeof pdfParse === "function") {
-      const parsed = await pdfParse(buffer);
-      extractedText = parsed.text || "";
-    } else if (pdfParse.PDFParser) {
-      const parser = new pdfParse.PDFParser();
-      const parsed = await parser.parseBuffer(buffer);
-      extractedText = parsed.text || "";
-    } else {
-      extractedText = buffer.toString("utf-8");
+    // Verify PDF header magic bytes "%PDF-"
+    const header = new TextDecoder().decode(uint8Array.subarray(0, 5));
+    if (header !== "%PDF-") {
+      return NextResponse.json(
+        {
+          error:
+            "The uploaded file is not a valid PDF document. Please paste your résumé text manually.",
+        },
+        { status: 422 }
+      );
     }
 
-    if (!extractedText.trim()) {
+    let parsedResult;
+    try {
+      parsedResult = await extractText(uint8Array);
+    } catch (parseErr: unknown) {
+      console.warn("PDF extraction error:", parseErr);
       return NextResponse.json(
-        { error: "Could not extract readable text from PDF. Please paste text directly." },
+        {
+          error:
+            "The uploaded PDF appears corrupted or unreadable. Please paste your résumé text manually.",
+        },
+        { status: 422 }
+      );
+    }
+
+    const rawText = Array.isArray(parsedResult.text)
+      ? parsedResult.text.join("\n\n")
+      : parsedResult.text || "";
+
+    const cleanText = rawText.trim();
+
+    // Edge case: Image-only / scanned PDF without text objects
+    if (!cleanText || cleanText.length < 15) {
+      return NextResponse.json(
+        {
+          error:
+            "Could not extract readable text from this PDF. It may be a scanned image or protected document. Please paste your résumé text manually.",
+        },
         { status: 422 }
       );
     }
 
     return NextResponse.json({
-      text: extractedText.trim(),
+      text: cleanText,
       fileName: file.name,
       fileSize: file.size,
+      totalPages: parsedResult.totalPages || 1,
     });
   } catch (err: unknown) {
-    console.error("PDF Parsing error:", err);
-    const message = err instanceof Error ? err.message : "Failed to parse PDF";
-    return NextResponse.json({ error: message }, { status: 500 });
+    console.error("PDF route error:", err);
+    return NextResponse.json(
+      {
+        error:
+          "Unable to read this PDF file. Please paste your résumé text manually.",
+      },
+      { status: 422 }
+    );
   }
 }
