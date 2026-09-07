@@ -1,5 +1,8 @@
 # Roast My Résumé
 
+> **Live Deployment:** [https://roast-my-resume-pied.vercel.app](https://roast-my-resume-pied.vercel.app)  
+> **GitHub Repository:** [https://github.com/Itsmeaadeesh/Roast-My-Resume](https://github.com/Itsmeaadeesh/Roast-My-Resume)
+
 A savage-but-useful resume critique web application styled as a vintage editorial broadsheet and financial terminal, powered by **Gemini 2.5** and real-time job market data from **USAJOBS**.
 
 ## Features
