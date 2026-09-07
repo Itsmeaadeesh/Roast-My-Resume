@@ -63,7 +63,7 @@ Only return the JSON object, with no markdown code fences, no extra text.`;
 
 export async function POST(req: NextRequest) {
   try {
-    const { resumeText, targetRole, customApiKey } = await req.json();
+    const { resumeText, targetRole } = await req.json();
 
     if (!resumeText || typeof resumeText !== "string" || !resumeText.trim()) {
       return NextResponse.json(
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const apiKey = customApiKey || process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
     let parsedResult: RoastResult;
 
@@ -84,15 +84,16 @@ export async function POST(req: NextRequest) {
         parsedResult = generateCuratedRoast(resumeText, targetRole);
       }
     } else {
-      // Intelligent fallback when key not yet configured in local env
       parsedResult = generateCuratedRoast(resumeText, targetRole);
     }
 
     return NextResponse.json(parsedResult);
   } catch (err: unknown) {
     console.error("Roast error:", err);
-    const message = err instanceof Error ? err.message : "Internal error generating roast.";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Service temporarily unavailable — try again shortly." },
+      { status: 503 }
+    );
   }
 }
 

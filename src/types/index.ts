@@ -50,9 +50,3 @@ export interface MarketData {
   insufficientData: boolean;
   statusNote?: string;
 }
-
-export interface AppSettings {
-  geminiKey: string;
-  usajobsKey: string;
-  usajobsEmail: string;
-}

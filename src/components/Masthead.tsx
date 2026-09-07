@@ -1,15 +1,6 @@
 import React from "react";
-import { Sliders } from "lucide-react";
 
-interface MastheadProps {
-  onOpenSettings?: () => void;
-  hasCustomKeys?: boolean;
-}
-
-export const Masthead: React.FC<MastheadProps> = ({
-  onOpenSettings,
-  hasCustomKeys = false,
-}) => {
+export const Masthead: React.FC = () => {
   const currentDate = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -27,18 +18,9 @@ export const Masthead: React.FC<MastheadProps> = ({
           <span className="hidden md:inline">EDITION: TECH RECRUITMENT & LABOR LIQUIDITY</span>
         </div>
         <div className="flex items-center gap-4">
-          <span className="hidden sm:inline">{currentDate}</span>
-          <button
-            onClick={onOpenSettings}
-            className="flex items-center gap-1.5 text-[#1A1A1A] hover:text-[#B91C1C] transition-colors py-0.5 px-1.5 border border-[#D8D2C7] hover:border-[#B91C1C] text-[10px] font-mono tracking-wider cursor-pointer"
-            title="Configure API Keys (Gemini & USAJOBS)"
-          >
-            <Sliders size={11} />
-            <span>TERMINAL CONFIG</span>
-            {hasCustomKeys && (
-              <span className="w-1.5 h-1.5 bg-[#B91C1C] rounded-full inline-block" />
-            )}
-          </button>
+          <span>{currentDate}</span>
+          <span className="hidden sm:inline">|</span>
+          <span className="hidden sm:inline text-[#B91C1C] font-semibold">LATE CITY FINAL</span>
         </div>
       </div>
 

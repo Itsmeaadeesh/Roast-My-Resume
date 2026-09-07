@@ -5,25 +5,23 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const role = searchParams.get("role") || "Software Engineer";
-    const customKey = req.headers.get("x-usajobs-key") || undefined;
-    const customEmail = req.headers.get("x-usajobs-email") || undefined;
 
-    const apiKey = customKey || process.env.USAJOBS_API_KEY;
-    const apiEmail = customEmail || process.env.USAJOBS_EMAIL;
+    const apiKey = process.env.USAJOBS_API_KEY;
+    const apiEmail = process.env.USAJOBS_USER_AGENT || process.env.USAJOBS_EMAIL;
 
     if (!apiKey || !apiEmail) {
-      // Graceful response when credentials are not yet configured
+      // Graceful response when credentials are not configured
       return NextResponse.json({
         roleQueried: role,
         totalOpenings: 0,
         competitionLevel: "MODERATE",
-        competitionRatioText: "Market index pending API registration",
+        competitionRatioText: "Market index temporarily unavailable",
         salaryMin: 0,
         salaryMax: 0,
         salaryMedian: 0,
         sampleListings: [],
         insufficientData: true,
-        statusNote: "USAJOBS API key not configured. Add USAJOBS_API_KEY and USAJOBS_EMAIL in Terminal Config or .env to activate live federal index.",
+        statusNote: "Service temporarily unavailable — try again shortly.",
       } satisfies MarketData);
     }
 
@@ -55,7 +53,7 @@ export async function GET(req: NextRequest) {
         salaryMedian: 0,
         sampleListings: [],
         insufficientData: true,
-        statusNote: `USAJOBS API HTTP ${response.status}. Verify your key and registered email.`,
+        statusNote: "Service temporarily unavailable — try again shortly.",
       } satisfies MarketData);
     }
 
