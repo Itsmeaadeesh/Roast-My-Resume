@@ -6,6 +6,7 @@ import { ResumeInput } from "@/components/ResumeInput";
 import { TelegramLoader } from "@/components/TelegramLoader";
 import { SettingsModal } from "@/components/SettingsModal";
 import { DossierView } from "@/components/DossierView";
+import { RoastCardModal } from "@/components/RoastCardModal";
 import { AppSettings, RoastResult, MarketData } from "@/types";
 import { Shield, AlertTriangle } from "lucide-react";
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [marketData, setMarketData] = useState<MarketData | null>(null);
   const [isLoadingMarket, setIsLoadingMarket] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   const [settings, setSettings] = useState<AppSettings>({
     geminiKey: "",
     usajobsKey: "",
@@ -154,6 +156,7 @@ export default function Home() {
               setMarketData(null);
               setError(null);
             }}
+            onOpenCardExport={() => setIsCardModalOpen(true)}
           />
         ) : (
           <ResumeInput
@@ -208,6 +211,16 @@ export default function Home() {
         onSave={handleSaveSettings}
         initialSettings={settings}
       />
+
+      {/* Shareable Roast Card Export Modal */}
+      {roastResult && (
+        <RoastCardModal
+          isOpen={isCardModalOpen}
+          onClose={() => setIsCardModalOpen(false)}
+          roast={roastResult}
+          marketData={marketData}
+        />
+      )}
     </div>
   );
 }
