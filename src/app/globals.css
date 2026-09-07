@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F7F5F0;
+  --foreground: #1A1A1A;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --font-serif: var(--font-newsreader), "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", Menlo, Consolas, monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper: #F7F5F0;
+  --color-paper-dim: #EFEAE1;
+  --color-paper-card: #FAF8F5;
+  --color-ink: #1A1A1A;
+  --color-ink-muted: #5C5855;
+  --color-ink-faint: #8E8A85;
+  --color-rule: #D8D2C7;
+  --color-rule-dark: #8C8477;
+  --color-roast: #B91C1C;
+  --color-roast-dark: #991B1B;
+  --color-amber-ink: #C2751A;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #F7F5F0;
+  color: #1A1A1A;
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sharp focus outlines for accessibility without rounded rings */
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 1.5px solid #1A1A1A;
+  outline-offset: 1px;
+}
+
+/* Tactile editorial micro-interactions */
+.editorial-hover {
+  position: relative;
+  display: inline-block;
+  transition: color 0.15s ease-in-out;
+}
+
+.editorial-hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: #B91C1C;
+  transform-origin: bottom right;
+  transition: transform 0.2s ease-out;
+}
+
+.editorial-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Newspaper double rules */
+.double-rule-top {
+  border-top: 3px double #1A1A1A;
+}
+
+.double-rule-bottom {
+  border-bottom: 3px double #1A1A1A;
+}
+
+/* Custom scrollbar for editorial aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #EFEAE1;
+}
+::-webkit-scrollbar-thumb {
+  background: #A39D93;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1A1A1A;
 }
