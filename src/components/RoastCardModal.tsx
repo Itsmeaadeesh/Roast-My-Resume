@@ -327,12 +327,12 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
         </div>
 
         {/* Aspect Ratio Selector */}
-        <div className="flex items-center justify-between gap-4 mb-4 text-xs font-mono">
-          <span className="text-[#8C8477] uppercase">FORMAT:</span>
-          <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 text-xs font-mono">
+          <span className="text-[#8C8477] uppercase text-[11px]">FORMAT:</span>
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setAspectRatio("story")}
-              className={`px-3 py-1 border transition-colors cursor-pointer ${
+              className={`px-2.5 py-1 text-[11px] border transition-colors cursor-pointer ${
                 aspectRatio === "story"
                   ? "bg-[#1A1A1A] text-[#F7F5F0] border-[#1A1A1A]"
                   : "bg-white text-[#1A1A1A] border-[#D8D2C7] hover:border-[#1A1A1A]"
@@ -342,7 +342,7 @@ export const RoastCardModal: React.FC<RoastCardModalProps> = ({
             </button>
             <button
               onClick={() => setAspectRatio("post")}
-              className={`px-3 py-1 border transition-colors cursor-pointer ${
+              className={`px-2.5 py-1 text-[11px] border transition-colors cursor-pointer ${
                 aspectRatio === "post"
                   ? "bg-[#1A1A1A] text-[#F7F5F0] border-[#1A1A1A]"
                   : "bg-white text-[#1A1A1A] border-[#D8D2C7] hover:border-[#1A1A1A]"

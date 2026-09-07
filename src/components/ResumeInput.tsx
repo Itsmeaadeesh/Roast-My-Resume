@@ -225,7 +225,7 @@ export const ResumeInput: React.FC<ResumeInputProps> = ({ onSubmit, isLoading })
             }}
             placeholder="Paste your full résumé here (Summary, Work History, Core Competencies, Education, Projects)..."
             required
-            className="w-full mt-2 p-3 sm:p-4 bg-transparent border-b border-[#D8D2C7] focus:border-[#1A1A1A] font-mono text-xs sm:text-sm text-[#1A1A1A] placeholder-[#A39D93] leading-relaxed resize-y focus:outline-none transition-colors"
+            className="w-full mt-2 p-3 sm:p-4 bg-transparent border-b border-[#D8D2C7] focus:border-[#1A1A1A] font-mono text-base sm:text-sm text-[#1A1A1A] placeholder-[#A39D93] leading-relaxed resize-y focus:outline-none transition-colors"
           />
         </div>
 
@@ -249,7 +249,7 @@ export const ResumeInput: React.FC<ResumeInputProps> = ({ onSubmit, isLoading })
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value)}
               placeholder="e.g. Senior Software Engineer, Staff SRE, Product Manager"
-              className="w-full px-3 py-2.5 bg-transparent border border-[#D8D2C7] focus:border-[#1A1A1A] font-mono text-xs text-[#1A1A1A] placeholder-[#A39D93] focus:outline-none"
+              className="w-full px-3 py-3 sm:py-2.5 bg-transparent border border-[#D8D2C7] focus:border-[#1A1A1A] font-mono text-base sm:text-xs text-[#1A1A1A] placeholder-[#A39D93] focus:outline-none min-h-[44px]"
             />
           </div>
         </div>
