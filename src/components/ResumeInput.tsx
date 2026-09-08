@@ -95,8 +95,18 @@ export const ResumeInput: React.FC<ResumeInputProps> = ({ onSubmit, isLoading })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!resumeText.trim() || isLoading) return;
-    onSubmit(resumeText.trim(), targetRole.trim());
+    if (isLoading) return;
+    const trimmed = resumeText.trim();
+    if (!trimmed) {
+      setUploadError("Please paste your résumé text or upload a document to proceed.");
+      return;
+    }
+    if (trimmed.length < 35) {
+      setUploadError("Résumé content is too brief for a substantive audit (minimum 35 characters required).");
+      return;
+    }
+    setUploadError(null);
+    onSubmit(trimmed, targetRole.trim());
   };
 
   return (

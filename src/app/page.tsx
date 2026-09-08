@@ -17,6 +17,11 @@ export default function Home() {
   const [isLoadingMarket, setIsLoadingMarket] = useState(false);
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
 
+  const [lastSubmission, setLastSubmission] = useState<{
+    resumeText: string;
+    targetRole: string;
+  } | null>(null);
+
   const fetchMarketData = async (role: string) => {
     setIsLoadingMarket(true);
     try {
@@ -36,6 +41,7 @@ export default function Home() {
   const handleResumeSubmit = async (resumeText: string, targetRole: string) => {
     setIsLoading(true);
     setError(null);
+    setLastSubmission({ resumeText, targetRole });
 
     try {
       // Call server-side Roast API
@@ -61,7 +67,7 @@ export default function Home() {
       // Trigger USAJOBS Market Reality Check
       fetchMarketData(roastData.candidateRole);
     } catch (err: unknown) {
-      console.error(err);
+      console.error("Submission failed:", err);
       const msg =
         err instanceof Error
           ? err.message
@@ -81,13 +87,33 @@ export default function Home() {
       <main className="flex-1">
         {error && (
           <div className="max-w-4xl mx-auto px-4 mt-6">
-            <div className="p-4 border-l-4 border-[#B91C1C] dark:border-[#EF4444] bg-[#FAF0F0] dark:bg-[#2A1515] text-[#1A1A1A] dark:text-[#F0EDE5] font-mono text-xs flex items-start gap-3">
-              <AlertTriangle size={18} className="text-[#B91C1C] dark:text-[#EF4444] shrink-0 mt-0.5" />
-              <div>
-                <span className="font-bold text-[#B91C1C] dark:text-[#EF4444] uppercase tracking-wider block mb-1">
-                  EDITORIAL DESK NOTICE // REVISE & RETRY
-                </span>
-                <span>{error}</span>
+            <div className="p-4 border-l-4 border-[#B91C1C] dark:border-[#EF4444] bg-[#FAF0F0] dark:bg-[#2A1515] text-[#1A1A1A] dark:text-[#F0EDE5] font-mono text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+              <div className="flex items-start gap-3">
+                <AlertTriangle size={18} className="text-[#B91C1C] dark:text-[#EF4444] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-bold text-[#B91C1C] dark:text-[#EF4444] uppercase tracking-wider block mb-1">
+                    EDITORIAL DESK NOTICE // REVISE & RETRY
+                  </span>
+                  <span className="leading-relaxed">{error}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                {lastSubmission && (
+                  <button
+                    onClick={() => handleResumeSubmit(lastSubmission.resumeText, lastSubmission.targetRole)}
+                    disabled={isLoading}
+                    className="px-3 py-1.5 bg-[#B91C1C] dark:bg-[#EF4444] text-[#F7F5F0] dark:text-[#FFFFFF] hover:bg-[#991B1B] dark:hover:bg-[#DC2626] font-bold uppercase tracking-wider text-[10px] transition-colors cursor-pointer"
+                  >
+                    Retry Submission
+                  </button>
+                )}
+                <button
+                  onClick={() => setError(null)}
+                  className="px-2.5 py-1.5 border border-[#D8D2C7] dark:border-[#3E3B36] hover:border-[#1A1A1A] dark:hover:border-[#EDEAE4] text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  Dismiss
+                </button>
               </div>
             </div>
           </div>
